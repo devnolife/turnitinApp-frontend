@@ -1,0 +1,21 @@
+@import '../../../base/plugins/charts/chart-apex.scss';
+
+div[type='heatmap'] {
+  .apexcharts-legend-marker {
+    top: -1px !important;
+  }
+}
+
+.dark-layout {
+  .apexcharts-gridlines-vertical line {
+    stroke: $theme-dark-border-color;
+  }
+}
+
+[dir='rtl'] {
+  .apexcharts-canvas {
+    .apexcharts-yaxis text {
+      text-anchor: end;
+    }
+  }
+}
