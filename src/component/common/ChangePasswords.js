@@ -1,5 +1,5 @@
 import { Fragment, useState } from 'react'
-import { Row, Col, Card, Form, Button, CardBody, CardTitle, CardHeader, FormFeedback, Spinner } from 'reactstrap'
+import { Row, Col, Card, Form, Button, CardBody, CardTitle, CardHeader, FormFeedback, Spinnern, Input } from 'reactstrap'
 import * as yup from 'yup'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -91,6 +91,10 @@ const ChangePasswords = () => {
       <Card>
         <CardHeader className='border-bottom'>
           <CardTitle tag='h4'>Ganti Kata Sandi</CardTitle>
+          {/* <CardTitle tag="h5" className="me-1 mt-0">Edit Profile</CardTitle>
+          <div className="form-switch form-check-primary">
+            <Input type="switch" id="switch-primary" name="primary" />
+          </div> */}
         </CardHeader>
         <CardBody className='pt-1'>
           <Form onSubmit={handleSubmit(onSubmit)}>

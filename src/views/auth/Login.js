@@ -127,8 +127,7 @@ const Login = () => {
                   name='username'
                   control={control}
                   rules={{
-                    minLength: 8,
-                    validate: value => !/\s/.test(value),
+                    minLength: 5,
                     required: 'Password tidak boleh kosong !'
                   }}
                   render={({ field }) => (

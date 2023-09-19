@@ -1,4 +1,4 @@
-import { User, Users, Database, Home } from 'react-feather'
+import { User, Users, Settings, Home } from 'react-feather'
 
 export default [
   {
@@ -22,6 +22,14 @@ export default [
     title: 'Users',
     icon: <Users size={20} />,
     navLink: '/admin/users',
+    action: 'manage',
+    resource: 'admin'
+  },
+  {
+    id: 'setting',
+    title: 'Setting',
+    icon: <Settings size={20} />,
+    navLink: '/admin/setting',
     action: 'manage',
     resource: 'admin'
   }

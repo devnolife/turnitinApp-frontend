@@ -9,7 +9,7 @@ import { downloadFile } from '../api'
 const InfoFile = ({ fieldName, label, bab, status }) => {
     // const [error, setError] = useState([])
 
-    const handleDownload = (e, bab) => {
+    const handleDownload = async (e, bab) => {
         e.preventDefault()
         downloadFile(bab)
             .then(res => {

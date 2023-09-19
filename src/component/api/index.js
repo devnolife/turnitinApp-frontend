@@ -24,6 +24,25 @@ const MySwal = withReactContent(Swal)
 //   </Fragment>
 // )
 
+export const updateHasilBab = async (id, data) => {
+  const res = await axios.post(`${baseUrl}/api/instruktur/update-hasil/${id}`, data)
+  return res.data
+}
+export const checkProdiHasResult = async (idProdi, idUser) => {
+  console.log("🚀 ~ file: index.js:32 ~ checkProdiHasResult ~ idProdi, idUser:", idProdi, idUser)
+  const res = await axios.get(`${baseUrl}/api/common/check-prodi/${idProdi}/${idUser}`)
+  return res.data
+}
+
+export const editHargaTurnitin = async (id, biaya) => {
+  const res = await axios.post(`${baseUrl}/api/admin/edit-biaya-turnitin/${id}`, { biaya })
+  return res.data.data
+}
+export const listHargaTurnitin = async () => {
+  const res = await axios.get(`${baseUrl}/api/admin/list-biaya-turnitin`)
+  return res.data.data
+}
+
 export const nilaiTurnitin = async () => {
   const res = await axios.get(`${baseUrl}/api/user/nilai-turnitin`)
   return res.data.data
@@ -47,6 +66,16 @@ export const downloadLaporan = async (id, month, year) => {
         confirmButtonText: 'Ok'
       })
     })
+}
+
+export const changeStatusProdi = async (id, status) => {
+  const res = await axios.post(`${baseUrl}/api/admin/change-status-hasil/${id}`, { has_hasil_turnitin: status })
+  return res.data.data
+}
+
+export const listProdi = async () => {
+  const res = await axios.get(`${baseUrl}/api/admin/list-prodi`)
+  return res.data.data
 }
 
 export const nilaiTurnitinUser = async (id) => {
@@ -86,7 +115,7 @@ export const infoNilai = async (id) => {
 
 export const deleteFileTurnitin = async (id, params) => {
   const res = await axios.get(`${baseUrl}/api/files/delete-file/${id}/${params}`)
-  return res.data.data
+  return res.data
 }
 
 export const listUsersInstruktur = async (status) => {
@@ -224,7 +253,6 @@ export const sendNotificationsActive = async (username) => {
 
 export const sendActivationUser = async () => {
   const res = await axios.get(`${baseUrl}/api/whatsapp/send-notification`)
-  console.log("🚀 ~ file: index.js:210 ~ sendActivationUser ~ res:", res)
   return res.data
 }
 

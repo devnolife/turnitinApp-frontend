@@ -7,7 +7,7 @@ import { getUserData } from '@utils'
 import Chart from 'react-apexcharts'
 import ChartNilai from './ChartNilai'
 const CardTurnitin = ({ dataUser, dataTurnitin, dataInstruktur }) => {
-    const { role } = getUserData()
+    const { id, role } = getUserData()
     const renderUserImgTable = (item) => {
         if (item.imageProfile !== null) {
             return (
@@ -61,7 +61,6 @@ const CardTurnitin = ({ dataUser, dataTurnitin, dataInstruktur }) => {
     useEffect(() => {
         sendMessageInstuktur()
             .then(res => {
-                console.log(res, 'res')
                 setLink(res)
             })
     }, [])
@@ -159,7 +158,7 @@ const CardTurnitin = ({ dataUser, dataTurnitin, dataInstruktur }) => {
                         <CardHeader>
                             <CardTitle tag='h4'>Nilai Turnitin</CardTitle>
                         </CardHeader>
-                        <ChartNilai />
+                        <ChartNilai idUser={id} idProdi={dataUser.prodi_id} />
                     </div>
                 </CardBody>
             </Card >

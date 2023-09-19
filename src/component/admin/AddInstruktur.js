@@ -1,6 +1,6 @@
 import Sidebar from '@components/sidebar'
 import { useForm, Controller } from 'react-hook-form'
-import { Button, Label, FormText, Form, Input } from 'reactstrap'
+import { Button, Label, FormText, Form, Input, FormFeedback } from 'reactstrap'
 import { addListInstruktur, checkNumberRegister } from '../api/index'
 
 import { ToastError, ToastSuccees } from "../auth/toast"
@@ -33,7 +33,10 @@ const SideBarAddInstruktur = ({ open, toggleSidebar }) => {
         setError,
         handleSubmit,
         formState: { errors }
-    } = useForm({ defaultValues })
+    } = useForm({
+        defaultValues,
+        mode: 'onChange'
+    })
 
 
     const onSubmit = async (data) => {
@@ -104,31 +107,40 @@ const SideBarAddInstruktur = ({ open, toggleSidebar }) => {
                         Username <span className='text-danger'>*</span>
                     </Label>
                     <Controller
+                        id='username'
                         name='username'
                         control={control}
+                        rules={{
+                            minLength: 8,
+                            validate: value => !/\s/.test(value)
+                        }}
                         render={({ field }) => (
-                            <Input id='username' placeholder='siFulan99' invalid={errors.username && true} {...field} />
+                            <Input placeholder='username'
+                                invalid={errors.username && true} {...field} />
                         )}
                     />
+                    {errors.username ? <FormFeedback>username minimal berjumlah 8 karakter dan tidak mengandung spasi</FormFeedback> : null}
                 </div>
                 <div className='mb-1'>
                     <Label className='form-label' for='email'>
                         Email <span className='text-danger'>*</span>
                     </Label>
                     <Controller
+                        id='email'
                         name='email'
                         control={control}
+                        rules={{
+                            required: 'Email harus diisi',
+                            pattern: {
+                                value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+                                message: 'Email tidak valid'
+                            }
+                        }}
                         render={({ field }) => (
-                            <Input
-                                type='email'
-                                id='email'
-                                placeholder='siFulan99@contoh.com'
-                                invalid={errors.email && true}
-                                {...field}
-                            />
+                            <Input type='email' placeholder='email' invalid={errors.email && true} {...field} />
                         )}
                     />
-                    <FormText color='muted'>You can use letters, numbers & periods</FormText>
+                    {errors.email ? <FormFeedback>{errors.email.message}</FormFeedback> : null}
                 </div>
 
                 <div className='mb-1'>
@@ -136,10 +148,22 @@ const SideBarAddInstruktur = ({ open, toggleSidebar }) => {
                         No HP(WhatsApp)<span className='text-danger'>*</span>
                     </Label>
                     <Controller
+                        id='no_hp'
                         name='no_hp'
                         control={control}
+                        rules={{
+                            required: true
+                        }}
                         render={({ field }) => (
-                            <Input id='no_hp' invalid={errors.no_hp && true} {...field} />
+                            <>
+                                <Input
+                                    type='number'
+                                    invalid={errors.no_hp && true}
+                                    {...field}
+                                />
+                                {errors.no_hp && <FormFeedback>No WhatsApp harus diisi</FormFeedback>}
+
+                            </>
                         )}
                     />
                 </div>

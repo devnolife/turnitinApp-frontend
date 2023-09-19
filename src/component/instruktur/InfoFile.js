@@ -23,7 +23,7 @@ const InfoFile = ({ fieldName, label, id, params }) => {
             })
             .catch((err) => {
                 toast.error(
-                    <ToastError message={err.response.data.message} />,
+                    <ToastError message={err.response?.data?.message || "File Berhasil Terhapus"} />,
                     { icon: false, transition: Slide, hideProgressBar: true, autoClose: 2000 }
                 )
                 window.location.reload()

@@ -20,9 +20,8 @@ const AccountTabs = ({ data }) => {
     const role = data.role.toUpperCase()
     const [dataUser, setData] = useState([])
     const [selected, setSelected] = useState(false)
-    const [block, setBlock] = useState(false)
+    const [block, setBlock] = useState(true)
     const [file, setFile] = useState('')
-
     const [avatar, setAvatar] = useState(data.imageProfile ? data.imageProfile : defaultAvatar)
 
     const uploadProfile = async (file, e) => {
@@ -82,17 +81,16 @@ const AccountTabs = ({ data }) => {
         setFile(files[0])
     }
 
-    console.log(dataUser, 'dataUser')
     return (
         <Fragment>
             <Card>
                 <CardHeader className='border-bottom'>
                     <CardTitle tag='h4'>Profile Detail</CardTitle>
                     <div className="d-flex align-items-center">
-                        <CardTitle tag="h5" className="me-1 mt-0">Edit Profile</CardTitle>
+                        {/* <CardTitle tag="h5" className="me-1 mt-0">Edit Profile</CardTitle>
                         <div className="form-switch form-check-primary">
                             <Input type="switch" id="switch-primary" name="primary" />
-                        </div>
+                        </div> */}
                     </div>
 
                 </CardHeader>
@@ -142,6 +140,7 @@ const AccountTabs = ({ data }) => {
                                     Nama
                                 </Label>
                                 <Input
+                                    disabled={true}
                                     onChange={(e) => setData({ ...dataUser, nama: e.target.value })}
                                     id='nama' type='text' name='nama' placeholder='Nama' defaultValue={data.nama} />
                             </Col>
@@ -150,6 +149,7 @@ const AccountTabs = ({ data }) => {
                                     E-mail
                                 </Label>
                                 <Input
+                                    disabled={true}
                                     onChange={(e) => setData({ ...dataUser, email: e.target.value })}
                                     id='no_hp' type='email' name='email' placeholder='Email' defaultValue={data.email} />
                             </Col>
@@ -157,8 +157,9 @@ const AccountTabs = ({ data }) => {
                                 <Label className='form-label' for='no_hp'>
                                     No WhatsApp
                                 </Label>
-                                <UILoader blocking={block} overlayColor='rgba(115, 103, 240, .1)'>
+                                <UILoader blocking={false} overlayColor='rgba(115, 103, 240, .1)'>
                                     <Input
+                                        disabled={block}
                                         onBlur={(e) => checkWhatsappNumbers(e, dataUser)}
                                         onChange={(e) => { setData({ ...dataUser, no_hp: e.target.value }) }}
                                         id='no_hp' type='number' name='no_hp' placeholder='no_hp' defaultValue={data.no_hp}
@@ -174,19 +175,25 @@ const AccountTabs = ({ data }) => {
                                             <Label className='form-label' for='prodi'>
                                                 Prodi
                                             </Label>
-                                            <Input id='prodi' name='prodi' placeholder='Prodi' disabled defaultValue={data.prodi} />
+                                            <Input
+                                                disabled={true}
+                                                id='prodi' name='prodi' placeholder='Prodi' defaultValue={data.prodi} />
                                         </Col>
                                         <Col sm='6' className='mb-1'>
                                             <Label className='form-label' for='fakultas'>
+
                                                 Fakultas
                                             </Label>
-                                            <Input id='fakultas' name='fakultas' placeholder='user' disabled defaultValue={data.fakultas} />
+                                            <Input
+                                                disabled={true}
+                                                id='fakultas' name='fakultas' placeholder='user' defaultValue={data.fakultas} />
                                         </Col>
                                         <Col sm='6' className='mb-1'>
                                             <Label className='form-label' for='nim'>
                                                 Nim
                                             </Label>
                                             <Input
+                                                disabled={true}
                                                 onChange={(e) => setData({ ...dataUser, nim: e.target.value })}
                                                 id='nim' type='number' placeholder='nim' defaultValue={data.nim} />
                                         </Col>
@@ -194,7 +201,9 @@ const AccountTabs = ({ data }) => {
                                             <Label className='form-label' for='status'>
                                                 Status
                                             </Label>
-                                            <Input id='status' name='status' placeholder='user' disabled defaultValue={data.role} />
+                                            <Input
+                                                disabled={true}
+                                                id='status' name='status' placeholder='user' defaultValue={data.role} />
                                         </Col>
                                     </>
                                 )

@@ -46,6 +46,14 @@ const RootRoutes = [
             action: 'manage',
             resource: 'admin'
         }
+    },
+    {
+        path: '/admin/setting',
+        component: lazy(() => import('../../views/admin/Setting')),
+        meta: {
+            action: 'manage',
+            resource: 'admin'
+        }
     }
 
 ]
