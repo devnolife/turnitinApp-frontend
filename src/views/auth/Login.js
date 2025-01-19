@@ -82,11 +82,19 @@ const Login = () => {
           )
         })
         .catch((err) => {
-          setLoading(false)
-          toast.error(
-            <ToastContentError message={err.response.data?.message || "Login Error"} />,
-            { icon: false, transition: Slide, hideProgressBar: true, autoClose: 2000 }
-          )
+          if (err?.response) {
+            setLoading(false)
+            toast.error(
+              <ToastContentError message={err.response.data?.message || "Login Error"} />,
+              { icon: false, transition: Slide, hideProgressBar: true, autoClose: 2000 }
+            )
+          } else {
+            setLoading(false)
+            toast.error(
+              <ToastContentError message={"Server Error"} />,
+              { icon: false, transition: Slide, hideProgressBar: true, autoClose: 2000 }
+            )
+          }
         })
     } else {
       for (const key in data) {
