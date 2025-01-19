@@ -120,7 +120,7 @@ const ChartNilai = ({ idProdi, idUser }) => {
                 </Card>
             )}
 
-            {hasBab === true && turnitin !== null ? (
+            {hasBab === "true" && turnitin !== null ? (
                 <Card>
                     <CardHeader>
                         <CardTitle tag='h4'>Nilai Akhir Per Bab</CardTitle>
