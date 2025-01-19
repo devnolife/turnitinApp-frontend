@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from 'react'
 import logo from '@src/assets/images/logo/unismuh-logo.svg'
 import { Link } from 'react-router-dom'
-import { Row, Col, Button, CardText } from 'reactstrap'
+import { Row, Col, Button, CardText, Spinner } from 'reactstrap'
 import '@styles/react/pages/page-authentication.scss'
 import { useSkin } from '@hooks/useSkin'
 import { FileText, User, FilePlus, Users, ArrowLeft, Power } from 'react-feather'
@@ -20,6 +20,7 @@ const ValidationUser = () => {
   const ref = useRef(null)
   const [stepper, setStepper] = useState(null)
   const [step, setStep] = useState([])
+  const [loading, setLoading] = useState(true) // Add loading state
 
   const { username } = getUserData()
   const dispatch = useDispatch()
@@ -64,6 +65,7 @@ const ValidationUser = () => {
       .then((res) => {
         console.log(res.data.data)
         setStep(res.data.data)
+        setLoading(false) // Set loading to false after data is fetched
       })
   }, [])
 
@@ -89,7 +91,11 @@ const ValidationUser = () => {
             <p className='text-center mb-3'>Untuk melanjutkan verifikasi, Silahkan lengkap data anda terlebih dahulu!</p>
             <div className='modern-vertical-wizard'>
               {
-                step.length !== 0 ? (
+                loading ? ( // Show spinner while loading
+                  <div className='text-center'>
+                    <Spinner color='primary' />
+                  </div>
+                ) : step.length !== 0 ? (
                   <Wizard
                     type='modern-vertical'
                     ref={ref}

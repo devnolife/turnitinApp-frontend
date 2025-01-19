@@ -109,20 +109,8 @@ const Router = () => {
   // ** Return Route to Render
   const ResolveRoutes = () => {
     return Object.keys(Layouts).map((layout, index) => {
-      // ** Convert Layout parameter to Layout Component
-      // ? Note: make sure to keep layout and component name equal
-
       const LayoutTag = Layouts[layout]
-
-      // ** Get Routes and Paths of the Layout
       const { LayoutRoutes, LayoutPaths } = LayoutRoutesAndPaths(layout)
-
-      // ** We have freedom to display different layout for different route
-      // ** We have made LayoutTag dynamic based on layout, we can also replace it with the only layout component,
-      // ** that we want to implement like VerticalLayout or HorizontalLayout
-      // ** We segregated all the routes based on the layouts and Resolved all those routes inside layouts
-
-      // ** RouterProps to pass them to Layouts
       const routerProps = {}
 
       return (
@@ -152,7 +140,6 @@ const Router = () => {
 
                       return (
                         <Fragment>
-                          {/* Layout Wrapper to add classes based on route's layout, appLayout and className */}
 
                           {route.layout === 'BlankLayout' ? (
                             <Fragment>
